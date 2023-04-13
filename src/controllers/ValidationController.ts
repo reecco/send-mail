@@ -51,7 +51,7 @@ class ValidationController {
         return res.status(201).json({ message: "Password recovery email sent. Check your inbox.", code: 201 });
 
       const token = uuidv4();
-      const url = "http://localhost:8080/validate-recover/" + token;
+      const url = "https://send-mail-e7ec.onrender.com/validate-recover/" + token;
 
       Promise.all([
         TokenModel.create({ user_id: user[0].id, value: token, used: false }),

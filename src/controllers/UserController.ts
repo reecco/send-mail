@@ -27,7 +27,7 @@ class UserController {
         throw new UnauthorizedError("Email already registered.");
 
       const token = uuidv4();
-      const url = "http://localhost:8080/verified/" + token;
+      const url = "https://send-mail-e7ec.onrender.com/verified/" + token;
 
       await sendToken({
         title: "(Do not answer. automatic email.)",
@@ -89,7 +89,7 @@ class UserController {
 
         if (token[0].used) {
           const newToken = uuidv4();
-          const url = "http://localhost:8080/verified/" + newToken;
+          const url = "https://send-mail-e7ec.onrender.com/verified/" + newToken;
 
           Promise.all([
             TokenModel.findOneAndDelete({ user_id: user[0].id }),
@@ -107,7 +107,7 @@ class UserController {
           return res.status(201).json({ message: "A new verification email has been sent. Check your inbox.", code: 201 });
         }
 
-        const url = "http://localhost:8080/verified/" + token[0].value;
+        const url = "https://send-mail-e7ec.onrender.com/verified/" + token[0].value;
 
         await sendToken({
           title: "(Do not answer. automatic email.)",
