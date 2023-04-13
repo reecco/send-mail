@@ -11,11 +11,11 @@ const upload = multer({ storage: storage });
 
 router
   .post("/register", UserController.register)
-  .patch('/userphoto', upload.single("image"), UserController.changeUserImage)
+  .patch('/userphoto', auth, upload.single("image"), UserController.changeUserImage)
   .post("/login", UserController.login)
-  .get("/users", UserController.getUsers)
-  .patch("/user", UserController.update)
-  .delete("/user", UserController.delete)
-  .get("/user/:id", UserController.getUser);
+  // .get("/users", auth, UserController.getUsers)
+  .patch("/user", auth, UserController.update)
+  .delete("/user", auth, UserController.delete)
+  .get("/user/:id", auth, UserController.getUser);
 
 export default router;

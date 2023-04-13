@@ -1,12 +1,14 @@
 import { Router } from "express";
+
 import KeyController from "../controllers/KeyController";
+import { authorization as auth } from "../middlewares";
 
 const router = Router();
 
 router
   .get("/user-keys/:id", KeyController.userList)
-  .get("/keys", KeyController.generalList)
-  .post("/generate", KeyController.generate)
-  .delete("/key", KeyController.delete);
+  // .get("/keys", KeyController.generalList)
+  .post("/generate", auth, KeyController.generate)
+  .delete("/key", auth, KeyController.delete);
 
 export default router;
