@@ -27,6 +27,7 @@ export interface Register {
 }
 
 export interface RequestToken {
+  id: string,
   email: string,
   name: string,
   iat: number,

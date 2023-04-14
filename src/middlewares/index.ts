@@ -7,7 +7,7 @@ import env from "../utils/environment";
 import BaseError from "../errors/BaseError";
 import { UnauthorizedError, ValidateError } from "../errors";
 
-export function errors(error: any, req: Request, res: Response, next: NextFunction) {
+export function errors(error: any, req: Request, res: Response, next: NextFunction): void {
   if (error instanceof BaseError)
     return error.sendResponse(res);
 
@@ -17,7 +17,7 @@ export function errors(error: any, req: Request, res: Response, next: NextFuncti
   return new BaseError().sendResponse(res);
 }
 
-export function access(app: Express) {
+export function access(app: Express): void {
   app.use((req: Request, res: Response, next: NextFunction) => {
     res.header("Access-Control-Allow-Origin", "*");
     res.header("Access-Control-Allow-Headers", "Content-Type, Content-Length, Authorization, Accept,X-Requested-With");
@@ -27,7 +27,7 @@ export function access(app: Express) {
   });
 }
 
-export function authorization(req: Request, res: Response, next: NextFunction) {
+export function authorization(req: Request, res: Response, next: NextFunction): void {
   const auth = req.headers["authorization"];
   const token = auth && auth.split(" ")[1];
 

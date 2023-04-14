@@ -4,7 +4,7 @@ import { Mail } from "../@types";
 import env from "./environment";
 import SendEmailError from "../errors/SendEmailError";
 
-export const sendToken = async ({ title, toEmail, name, text }: Mail) => {
+export const sendToken = async ({ title, toEmail, name, text }: Mail): Promise<void> => {
   const tranporter = nodemailer.createTransport({
     host: "smtp.gmail.com",
     port: 465,
@@ -16,7 +16,7 @@ export const sendToken = async ({ title, toEmail, name, text }: Mail) => {
   });
 
   try {
-    return await tranporter.sendMail({
+    await tranporter.sendMail({
       from: `Do not answer. Automatic email. <${env.USER}>`,
       to: toEmail,
       subject: `${title} ${name}`,
@@ -27,7 +27,7 @@ export const sendToken = async ({ title, toEmail, name, text }: Mail) => {
   }
 }
 
-export const sendEmail = async ({ name, text, toEmail, fromEmail }: Mail) => {
+export const sendEmail = async ({ name, text, toEmail, fromEmail }: Mail): Promise<void> => {
   const tranporter = nodemailer.createTransport({
     host: "smtp.gmail.com",
     port: 465,
@@ -39,7 +39,7 @@ export const sendEmail = async ({ name, text, toEmail, fromEmail }: Mail) => {
   });
 
   try {
-    return await tranporter.sendMail({
+    await tranporter.sendMail({
       from: `Do not answer. Automatic email. <${env.USER}>`,
       to: toEmail,
       subject: `${name} - ${fromEmail}`,
@@ -50,11 +50,11 @@ export const sendEmail = async ({ name, text, toEmail, fromEmail }: Mail) => {
   }
 }
 
-export const changeEmail = (email: string) => {
+export const changeEmail = (email: string): string => {
   return email;
 }
 
-export const templateRegister = (url: string) => {
+export const templateRegister = (url: string): string => {
   return `<!DOCTYPE html>
   <html lang="en">
   <head>
@@ -102,7 +102,7 @@ export const templateRegister = (url: string) => {
   </html>`;
 }
 
-export const templateRecover = (url: string) => {
+export const templateRecover = (url: string): string => {
   return `<!DOCTYPE html>
   <html lang="en">
   <head>

@@ -122,7 +122,7 @@ class UserController {
       if (!env.SECRET_JWT)
         throw new BaseError('Internal server error.');
 
-      jwt.sign({ email: user[0].email, name: user[0].name }, env.SECRET_JWT, { expiresIn: "1h" }, (error, data) => {
+      jwt.sign({ id: user[0].id, email: user[0].email, name: user[0].name }, env.SECRET_JWT, { expiresIn: "1h" }, (error, data) => {
         if (error)
           throw new BaseError("An error occurred while generating token: " + error.message);
 

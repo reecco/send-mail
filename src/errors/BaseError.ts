@@ -9,7 +9,7 @@ class BaseError extends Error {
     this.code = code;
   }
 
-  public sendResponse(res: Response) {
+  public sendResponse(res: Response): void {
     res.status(this.code).json({ message: this.message, code: this.code });
   }
 }
